@@ -26,18 +26,15 @@ jobs:
       - run: poetry run black --check .
       - run: poetry run flake8
       - run: poetry run mypy
-      - run: poetry run pytest --cov #--cov-fail-under=90
+      - run: poetry run pytest --cov # --cov-fail-under=90
 
   docker-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Test building docker image
         run: docker build . -t bot_sylwek:test
-
       - name: Test running docker-compose
         run: docker-compose up
-
       - name: Remove docker compose
-        run docker-compose down
+        run: docker-compose down

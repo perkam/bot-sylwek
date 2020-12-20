@@ -47,3 +47,10 @@ repos:
     entry: poetry run python -m pytest --cov --cov-fail-under=100 --cov-config=.coveragerc --cov-report html:cov_html
     types: [python]
     pass_filenames: false
+
+  - id: yamllint
+    name: yamllint
+    stages: [commit]
+    language: system
+    entry: poetry run yamllint -d relaxed .github/workflows/pipeline.yml
+    types: [yaml]
