@@ -44,7 +44,7 @@ jobs:
         - name: ssh deploy
           uses: appleboy/ssh-action@master
           with:
-            host: ${{ secrets.SERVER_IP }}
+            host: ${{ secrets.REMOTE_HOST }}
             username: ${{ secrets.REMOTE_USER }}
             password: ${{ secrets.REMOTE_PASSWORD }}
             script: cd "www/app" && git pull && export DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }} && docker build -t bot-sylwek && docker-compose up
