@@ -1,7 +1,4 @@
-import sys
-
-from bot_sylwester.bot_sylwester import fib
+from bot_sylwester.client import run_discord_client
 
 if __name__ == "__main__":
-    n = int(sys.argv[1])
-    print(fib(n))
+    run_discord_client()

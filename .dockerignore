@@ -1,7 +1,8 @@
 # Ignore everything
 **
 
-# ... except for dependencies and source
-!Pipfile
-!Pipfile.lock
+# ... except for dependencies, source and .env
+!pyproject.toml
+!poetry.lock
 !bot_sylwester
+!.env
