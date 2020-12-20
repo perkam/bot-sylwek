@@ -52,5 +52,5 @@ repos:
     name: yamllint
     stages: [commit]
     language: system
-    entry: poetry run yamllint -d relaxed .github/workflows/pipeline.yml
+    entry: poetry run yamllint -d relaxed .github/workflows/
     types: [yaml]

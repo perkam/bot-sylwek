@@ -42,9 +42,16 @@ jobs:
         - uses: actions/checkout@v2
 
         - name: ssh deploy
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.REMOTE_HOST }}
-            username: ${{ secrets.REMOTE_USER }}
-            password: ${{ secrets.REMOTE_PASSWORD }}
-            script: cd "www/app" && git pull && export DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }} && docker build -t bot-sylwek && docker-compose up
+          uses: easingthemes/ssh-deploy@v2.1.5
+          env:
+              SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+              REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+              REMOTE_USER: ${{ secrets.REMOTE_USER }}
+              TARGET: "/home/github-actions/www/app"
+        -   name: Run application
+            uses: appleboy/ssh-action@master
+            with:
+                host: ${{ secrets.REMOTE_HOST }}
+                username: ${{ secrets.REMOTE_USER }}
+                password: ${{ secrets.REMOTE_PASSWORD }}
+                script: cd "www/app" && echo "DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}" >> .env && docker build -t bot-sylwek . && docker-compose up
