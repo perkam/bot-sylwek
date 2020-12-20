@@ -32,9 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Test building docker image
-        run: docker build . -t bot_sylwek:test
+        run: docker build . -t bot_sylwek
+
       - name: Test running docker-compose
         run: docker-compose up
+
       - name: Remove docker compose
         run: docker-compose down
