@@ -27,39 +27,40 @@ jobs:
       - run: poetry run flake8
       - run: poetry run mypy
       - run: poetry run pytest --cov # --cov-fail-under=90
-
-  docker-image:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
       - name: Test building docker image
         run: docker build . -t bot_sylwek
-
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v2
-
-        -   name: Clear app directory
-            uses: appleboy/ssh-action@master
-            with:
-                host: ${{ secrets.REMOTE_HOST }}
-                username: ${{ secrets.REMOTE_USER }}
-                password: ${{ secrets.REMOTE_PASSWORD }}
-                script: rm -rf www && mkdir -p www/app
-
-        - name: rsync
-          uses: easingthemes/ssh-deploy@v2.1.5
-          env:
-              SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-              REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-              REMOTE_USER: ${{ secrets.REMOTE_USER }}
-              TARGET: "/home/github-actions/www/app"
-        -   name: Run application
-            uses: appleboy/ssh-action@master
-            with:
-                host: ${{ secrets.REMOTE_HOST }}
-                username: ${{ secrets.REMOTE_USER }}
-                password: ${{ secrets.REMOTE_PASSWORD }}
-                script: cd "www/app" && echo "DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}" >> .env && docker build -t bot-sylwek . && docker-compose up -d
+      - name: Clear app directory
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.REMOTE_HOST }}
+            username: ${{ secrets.REMOTE_USER }}
+            password: ${{ secrets.REMOTE_PASSWORD }}
+            script: rm -rf www && mkdir -p www/app
+      - name: Clear app directory
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.REMOTE_HOST }}
+            username: ${{ secrets.REMOTE_USER }}
+            password: ${{ secrets.REMOTE_PASSWORD }}
+            script: rm -rf www && mkdir -p www/app
+      - name: Clear app directory
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.REMOTE_HOST }}
+            username: ${{ secrets.REMOTE_USER }}
+            password: ${{ secrets.REMOTE_PASSWORD }}
+            script: rm -rf www && mkdir -p www/app
+      - name: rsync
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+            REMOTE_USER: ${{ secrets.REMOTE_USER }}
+            TARGET: "/home/github-actions/www/app"
+      - name: Run application
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.REMOTE_HOST }}
+            username: ${{ secrets.REMOTE_USER }}
+            password: ${{ secrets.REMOTE_PASSWORD }}
+            script: cd "www/app" && echo "DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}" >> .env && docker build -t bot-sylwek . && docker-compose up -d
