@@ -2,7 +2,7 @@
 name = "bot_sylwester"
 version = "0.1.0"
 description = "Bot sylwester"
-authors = ["gruszek, lamp"]
+authors = ["gruszek, perkam"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
