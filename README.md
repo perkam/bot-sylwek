@@ -17,7 +17,7 @@ Requirements:
 In order to run bot-sylwester in docker container run below:
 ```shell script
 docker build -t bot-sylwek .
-docker-compose up -d
+docker run -it --rm -v <local persistence directory>:/home/appuser/data bot-sylwek
 ```
 
 In order to stop it run:
