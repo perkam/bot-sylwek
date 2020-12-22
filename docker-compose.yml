@@ -3,3 +3,5 @@ version: '3'
 services:
   bot-sylwek:
     image: bot-sylwek:latest
+    volumes:
+     - ./data:/home/appuser/data
