@@ -11,6 +11,8 @@ python-dotenv = "^0.15.0"
 yamllint = "^1.25.0"
 tinydb = "^4.3.0"
 emoji = "^0.6.0"
+Flask = "^1.1.2"
+Flask-RESTful = "^0.3.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.2"

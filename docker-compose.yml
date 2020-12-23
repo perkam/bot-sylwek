@@ -4,4 +4,6 @@ services:
   bot-sylwek:
     image: bot-sylwek:latest
     volumes:
-     - ./data:/home/appuser/data
+    - ./data:/home/appuser/data
+    ports:
+    - 2137:2137
