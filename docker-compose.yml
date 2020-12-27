@@ -4,6 +4,6 @@ services:
   bot-sylwek:
     image: bot-sylwek:latest
     volumes:
-    - ./data:/home/appuser/data
+    - /home/github-actions/data/bot-sylwek:/home/appuser/data
     ports:
     - 2137:2137
